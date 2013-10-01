@@ -44,7 +44,4 @@ if [ $? != 0 ]; then
   exit 4
 fi
 
-#TODO: import this image and fix XML to virsh
-#TODO: virsh start
-
 echo " => $VM_IMAGE is done."
