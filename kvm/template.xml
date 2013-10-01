@@ -1,0 +1,33 @@
+<domain type='kvm'>
+  <name>NEW_HOSTNAME</name>
+  <uuid>NEW_UUID</uuid>
+  <memory>NEW_MEMORY</memory>
+  <currentMemory>NEW_MEMORY</currentMemory>
+  <vcpu>NEW_VCPU</vcpu>
+  <os>
+    <type>hvm</type>
+    <boot dev='hd'/>
+  </os>
+  <features>
+    <acpi/>
+  </features>
+  <clock offset='utc'/>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>destroy</on_crash>
+  <devices>
+    <emulator>/usr/bin/kvm</emulator>
+   <disk type='file' device='disk'>
+      <driver name='qemu' type='qcow' cache='none'/>
+      <source file='NEW_QCOW_PATH'/>
+      <target dev='vda' bus='virtio'/>
+    </disk>
+    <interface type='bridge'>
+      <mac address='NEW_MAC_ADDR'/>
+      <source bridge='NEW_BRIDGE_IF'/>
+    </interface>
+    <input type='tablet' bus='usb'/> 
+    <input type='mouse' bus='ps2'/>
+    <graphics type='vnc' port='-1' listen='0.0.0.0'/>
+  </devices>
+</domain>

@@ -1,0 +1,48 @@
+{
+  "builders": [{
+    "type": "virtualbox",
+    "vm_name": "ubuntu1204",
+    "guest_os_type": "Ubuntu_64",
+    "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.3-server-amd64.iso",
+    "iso_checksum": "2cbe868812a871242cdcdd8f2fd6feb9",
+    "iso_checksum_type": "md5",
+    "ssh_username": "ubuntu",
+    "ssh_password": "ubuntu",
+    "ssh_wait_timeout": "10m",
+    "http_directory": "www",
+    "boot_wait": "5s",
+    "boot_command": [
+      "<esc><esc><enter><wait>",
+      "/install/vmlinuz noapic ",
+      "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+      "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+      "hostname={{ .Name }} ",
+      "fb=false debconf/frontend=noninteractive ",
+      "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+      "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+      "initrd=/install/initrd.gz -- <enter>"
+    ],
+    "shutdown_command": "echo 'ubuntu' | sudo -E -S shutdown -P now",
+    "shutdown_timeout": "2m"
+  }],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "files/sshd-key-gen.sh",
+      "destination": "/tmp/sshd-key-gen.sh"
+    },
+    {
+      "type": "file",
+      "source": "files/rc.local",
+      "destination": "/tmp/rc.local"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'ubuntu' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
+      "scripts": [
+        "scripts/system_update.sh",
+        "scripts/place_files.sh"
+      ]
+    }
+  ]
+}
