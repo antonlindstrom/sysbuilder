@@ -3,6 +3,12 @@
 This is a project for building images in KVM from a defined template made by
 Packer.
 
+## Usage
+
+    sudo ./create_vm.sh mymachine.example.com
+
+## Details
+
 Due to the lack of KVM support in Packer, we're building the image in
 Virtualbox. Export it to qcow and run `sysprep.sh`.
 
