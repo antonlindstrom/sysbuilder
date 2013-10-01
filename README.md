@@ -3,6 +3,9 @@
 This is a project for building images in KVM from a defined template made by
 Packer.
 
+This project is in an early stage and the goal is to automate the whole process
+of setting up a new machine from a template.
+
 ## Usage
 
     sudo ./create_vm.sh mymachine.example.com
@@ -24,13 +27,6 @@ Virtualbox. Export it to qcow and run `sysprep.sh`.
 The `create_vm.sh` script runs both `sysprep.sh` and `build_template.sh` as
 well as defining and starting the VM with `virsh`.
 
-This project is in an early stage and the goal is to automate the whole process
-of setting up a new machine from a template.
-
-Next steps on wishlist:
-* Flavors in `create_vm.sh`, like small, medium, large (like tshirts omg!)
-* An API to copy and create machines via HTTP from template
-
 ### Environment
 
 It should be fairly simple to change the path of the image location but default
@@ -47,6 +43,12 @@ These Ubuntu packages are required:
 This should work:
 
     apt-get install guestmount libguest-tools uuid
+
+### Whishlist
+
+Next steps on wishlist:
+* Flavors in `create_vm.sh`, like small, medium, large (like tshirts omg!)
+* An API to copy and create machines via HTTP from template
 
 ### Wat?
 
