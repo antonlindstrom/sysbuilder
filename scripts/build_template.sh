@@ -3,7 +3,7 @@
 NEW_HOSTNAME=$1
 NEW_MEMORY=524288
 NEW_VCPU=1
-NEW_QCOW_PATH=/mnt/storage/vms/${NEW_HOSTNAME}.qcow
+NEW_QCOW_PATH=/var/lib/libvirt/images/${NEW_HOSTNAME}.qcow
 NEW_BRIDGE_IF=br0
 
 

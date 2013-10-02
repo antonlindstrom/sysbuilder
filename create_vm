@@ -24,7 +24,7 @@ if [ $? != 0 ]; then
   exit 2
 fi
 
-mv $VM_HOSTNAME.qcow /mnt/storage/vms/$VM_HOSTNAME.qcow
+mv $VM_HOSTNAME.qcow /var/lib/libvirt/images/$VM_HOSTNAME.qcow
 
 echo "Starting and defining $VM_HOSTNAME"
 virsh define $VM_HOSTNAME.xml > /dev/null
