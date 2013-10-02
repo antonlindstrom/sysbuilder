@@ -10,14 +10,14 @@ fi
 
 echo "Starting build of: $VM_HOSTNAME"
 
-bash ./sysprep.sh $VM_HOSTNAME
+bash ./scripts/sysprep.sh $VM_HOSTNAME
 
 if [ $? != 0 ]; then
   echo "Could not create image!"
   exit 2
 fi
 
-bash ./build_template.sh $VM_HOSTNAME
+bash ./scripts/build_template.sh $VM_HOSTNAME
 
 if [ $? != 0 ]; then
   echo "Could not create template!"
