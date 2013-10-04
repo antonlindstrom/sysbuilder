@@ -32,7 +32,7 @@ Default settings per template:
 ### Environment
 
 It should be fairly simple to change the path of the image location but default
-is that they are stored at `/mnt/storage/vms`.
+is that they are stored at `/var/lib/libvirt/images`.
 
 ### Requirements
 
