@@ -6,7 +6,9 @@ NEW_MEMORY=524288
 NEW_VCPU=1
 NEW_QCOW_PATH=$NEW_VM_PATH/${NEW_HOSTNAME}.qcow
 NEW_BRIDGE_IF=br0
+NEW_DEFINITION=$NEW_VM_PATH/${NEW_HOSTNAME}.xml
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Do not change below
 NEW_UUID=$(uuid)
@@ -24,20 +26,20 @@ if [ ! -n $NEW_VM_PATH ]; then
   exit 1
 fi
 
-if [ -f ${NEW_HOSTNAME}.xml ]; then
-  echo "Image ${NEW_HOSTNAME}.xml exists, I'm refusing to build it again."
+if [ -f $NEW_DEFINITION ]; then
+  echo "Image $NEW_DEFINITION exists, I'm refusing to build it again."
   exit 2
 fi
 
-cp kvm/template.xml ${NEW_HOSTNAME}.xml
+cp $DIR/../kvm/template.xml $NEW_DEFINITION
 
-sed -i -e "s/NEW_UUID/$UUID/" ${NEW_HOSTNAME}.xml
-sed -i -e "s/NEW_HOSTNAME/$NEW_HOSTNAME/" ${NEW_HOSTNAME}.xml
-sed -i -e "s/NEW_MEMORY/$NEW_MEMORY/" ${NEW_HOSTNAME}.xml
-sed -i -e "s/NEW_VCPU/$NEW_VCPU/" ${NEW_HOSTNAME}.xml
-sed -i -e "s,NEW_QCOW_PATH,$NEW_QCOW_PATH," ${NEW_HOSTNAME}.xml
-sed -i -e "s/NEW_BRIDGE_IF/$NEW_BRIDGE_IF/" ${NEW_HOSTNAME}.xml
-sed -i -e "s/NEW_MAC_ADDR/$NEW_MAC_ADDR/" ${NEW_HOSTNAME}.xml
-sed -i -e "s/NEW_UUID/$NEW_UUID/" ${NEW_HOSTNAME}.xml
+sed -i -e "s/NEW_UUID/$UUID/" $NEW_DEFINITION
+sed -i -e "s/NEW_HOSTNAME/$NEW_HOSTNAME/" $NEW_DEFINITION
+sed -i -e "s/NEW_MEMORY/$NEW_MEMORY/" $NEW_DEFINITION
+sed -i -e "s/NEW_VCPU/$NEW_VCPU/" $NEW_DEFINITION
+sed -i -e "s,NEW_QCOW_PATH,$NEW_QCOW_PATH," $NEW_DEFINITION
+sed -i -e "s/NEW_BRIDGE_IF/$NEW_BRIDGE_IF/" $NEW_DEFINITION
+sed -i -e "s/NEW_MAC_ADDR/$NEW_MAC_ADDR/" $NEW_DEFINITION
+sed -i -e "s/NEW_UUID/$NEW_UUID/" $NEW_DEFINITION
 
-echo " => New definition: ${NEW_HOSTNAME}.xml"
+echo " => New definition: $NEW_DEFINITION"
