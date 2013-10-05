@@ -8,14 +8,14 @@ VM_IMAGE=$VM_PATH/$VM_HOSTNAME.qcow
 # We require hostname
 if [ -x $VM_HOSTNAME ]; then
   echo "This script requires argument hostname"
-  echo "Usage: ./$0 [HOSTNAME] [TEMPLATE] [VM_PATH]"
+  echo "Usage: $0 [HOSTNAME] [TEMPLATE] [VM_PATH]"
   exit 1
 fi
 
 # We also require a template
 if [ -x $VM_TEMPLATE ]; then
   echo "This script requires argument template"
-  echo "Usage: ./$0 [HOSTNAME] [TEMPLATE] [VM_PATH]"
+  echo "Usage: $0 [HOSTNAME] [TEMPLATE] [VM_PATH]"
   exit 1
 fi
 
@@ -26,9 +26,9 @@ if [ ! -f $VM_TEMPLATE ]; then
 fi
 
 # We also require VM_PATH
-if [ -x $VM_PATH ]; then
+if [ ! -n $VM_PATH ]; then
   echo "This script requires argument vm_path"
-  echo "Usage: ./$0 [HOSTNAME] [TEMPLATE] [VM_PATH]"
+  echo "Usage: $0 [HOSTNAME] [TEMPLATE] [VM_PATH]"
   exit 1
 fi
 

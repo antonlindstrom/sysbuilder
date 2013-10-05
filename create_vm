@@ -2,7 +2,6 @@
 
 VM_HOSTNAME=$1
 VM_TEMPLATE=$2
-VM_PATH=$3
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -18,10 +17,12 @@ if [ -x $VM_TEMPLATE ]; then
   exit 1
 fi
 
-if [ -x $VM_PATH ]; then
-  echo "No VM_PATH found (set as last argument), using: /var/lib/libvirt/images"
-  echo "Usage: $0 [HOSTNAME] [TEMPLATE] [VM_PATH]"
+if [ -n $3 ]; then
+  VM_PATH=$3
+  echo "VM_PATH set, using: $VM_PATH"
+else
   VM_PATH=/var/lib/libvirt/images
+  echo "No VM_PATH, using: $VM_PATH"
 fi
 
 echo "Starting build of: $VM_HOSTNAME"

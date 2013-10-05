@@ -14,13 +14,13 @@ NEW_MAC_ADDR=$(printf '52:54:01:%02X:%02X:%02X\n' $[RANDOM%256] $[RANDOM%256] $[
 
 if [ -x $NEW_HOSTNAME ]; then
   echo "This script requires argument hostname"
-  echo "Usage: ./$0 [HOSTNAME]"
+  echo "Usage: $0 [HOSTNAME]"
   exit 1
 fi
 
-if [ -x $NEW_VM_PATH ]; then
+if [ ! -n $NEW_VM_PATH ]; then
   echo "This script requires argument vm_path"
-  echo "Usage: ./$0 [HOSTNAME] [TEMPLATE] [VM_PATH]"
+  echo "Usage: $0 [HOSTNAME] [TEMPLATE] [VM_PATH]"
   exit 1
 fi
 
