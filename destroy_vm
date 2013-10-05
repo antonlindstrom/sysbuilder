@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 VM_HOSTNAME=$1
+VM_PATH=$2
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
