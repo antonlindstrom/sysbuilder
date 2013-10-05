@@ -3,6 +3,8 @@
 VM_HOSTNAME=$1
 VM_TEMPLATE=$2
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 if [ -x $VM_HOSTNAME ]; then
   echo "Requires argument hostname"
   echo "Usage: $0 [HOSTNAME] [TEMPLATE]"
@@ -17,14 +19,14 @@ fi
 
 echo "Starting build of: $VM_HOSTNAME"
 
-bash ./scripts/sysprep.sh $VM_HOSTNAME $VM_TEMPLATE
+bash $DIR/scripts/sysprep.sh $VM_HOSTNAME $VM_TEMPLATE
 
 if [ $? != 0 ]; then
   echo "Could not create image!"
   exit 2
 fi
 
-bash ./scripts/build_template.sh $VM_HOSTNAME
+bash $DIR/scripts/build_template.sh $VM_HOSTNAME
 
 if [ $? != 0 ]; then
   echo "Could not create template!"
