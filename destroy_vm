@@ -10,12 +10,11 @@ if [ -x $VM_HOSTNAME ]; then
   exit 1
 fi
 
-if [ ! -x $2 ]; then
-  VM_PATH=$2
-  echo "VM_PATH set, using: $VM_PATH"
-else
+if [ -x $VM_PATH ]; then
   VM_PATH=/var/lib/libvirt/images
   echo "No VM_PATH, using: $VM_PATH"
+else
+  echo "VM_PATH set, using: $VM_PATH"
 fi
 
 if [ ! -f $VM_PATH/${VM_HOSTNAME}.xml ]; then
