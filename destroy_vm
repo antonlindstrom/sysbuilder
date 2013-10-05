@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+VM_HOSTNAME=$1
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [ -x $VM_HOSTNAME ]; then
+  echo "Requires argument hostname"
+  echo "Usage: $0 [HOSTNAME]"
+  exit 1
+fi
+
+if [ ! -x $2 ]; then
+  VM_PATH=$2
+  echo "VM_PATH set, using: $VM_PATH"
+else
+  VM_PATH=/var/lib/libvirt/images
+  echo "No VM_PATH, using: $VM_PATH"
+fi
+
+if [ ! -f $VM_PATH/${VM_HOSTNAME}.xml ]; then
+  echo "Couldn't find definition for $VM_PATH/${VM_HOSTNAME}.xml"
+  exit 2
+fi
+
+echo "Destroying: $VM_HOSTNAME"
+
+/usr/bin/virsh destroy $VM_HOSTNAME > /dev/null
+/usr/bin/virsh undefine $VM_HOSTNAME > /dev/null
+
+rm $VM_PATH/${VM_HOSTNAME}.xml > /dev/null
+rm $VM_PATH/${VM_HOSTNAME}.qcow > /dev/null
+
+echo "Destroyed $VM_HOSTNAME"
