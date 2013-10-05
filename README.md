@@ -24,10 +24,15 @@ Virtualbox. The script asumes you use qcow.
 The `create_vm` script runs both `scripts/sysprep.sh` and `scripts/build_template.sh` as
 well as defining and starting the VM with `virsh`.
 
+Default settings per template:
+
+* 512MB Memory
+* 1 vCPU
+
 ### Environment
 
 It should be fairly simple to change the path of the image location but default
-is that they are stored at `/mnt/storage/vms`.
+is that they are stored at `/var/lib/libvirt/images`.
 
 ### Requirements
 
