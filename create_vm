@@ -2,6 +2,7 @@
 
 VM_HOSTNAME=$1
 VM_TEMPLATE=$2
+VM_PATH=$3
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -17,23 +18,29 @@ if [ -x $VM_TEMPLATE ]; then
   exit 1
 fi
 
+if [ -x $VM_PATH ]; then
+  echo "No VM_PATH found (set as last argument), using: /var/lib/libvirt/images"
+  echo "Usage: $0 [HOSTNAME] [TEMPLATE] [VM_PATH]"
+  VM_PATH=/var/lib/libvirt/images
+fi
+
 echo "Starting build of: $VM_HOSTNAME"
 
-bash $DIR/scripts/sysprep.sh $VM_HOSTNAME $VM_TEMPLATE
+bash $DIR/scripts/sysprep.sh $VM_HOSTNAME $VM_TEMPLATE $VM_PATH
 
 if [ $? != 0 ]; then
   echo "Could not create image!"
   exit 2
 fi
 
-bash $DIR/scripts/build_template.sh $VM_HOSTNAME
+bash $DIR/scripts/build_template.sh $VM_HOSTNAME $VM_PATH
 
 if [ $? != 0 ]; then
   echo "Could not create template!"
   exit 2
 fi
 
-mv $VM_HOSTNAME.qcow /var/lib/libvirt/images/$VM_HOSTNAME.qcow
+mv $VM_HOSTNAME.qcow $VM_PATH/$VM_HOSTNAME.qcow
 
 echo "Starting and defining $VM_HOSTNAME"
 virsh define $VM_HOSTNAME.xml > /dev/null

@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
 NEW_HOSTNAME=$1
+NEW_VM_PATH=$2
 NEW_MEMORY=524288
 NEW_VCPU=1
-NEW_QCOW_PATH=/var/lib/libvirt/images/${NEW_HOSTNAME}.qcow
+NEW_QCOW_PATH=$NEW_VM_PATH/${NEW_HOSTNAME}.qcow
 NEW_BRIDGE_IF=br0
 
 
@@ -14,6 +15,12 @@ NEW_MAC_ADDR=$(printf '52:54:01:%02X:%02X:%02X\n' $[RANDOM%256] $[RANDOM%256] $[
 if [ -x $NEW_HOSTNAME ]; then
   echo "This script requires argument hostname"
   echo "Usage: ./$0 [HOSTNAME]"
+  exit 1
+fi
+
+if [ -x $NEW_VM_PATH ]; then
+  echo "This script requires argument vm_path"
+  echo "Usage: ./$0 [HOSTNAME] [TEMPLATE] [VM_PATH]"
   exit 1
 fi
 
