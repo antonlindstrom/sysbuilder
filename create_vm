@@ -44,5 +44,5 @@ fi
 mv $VM_HOSTNAME.qcow $VM_PATH/$VM_HOSTNAME.qcow
 
 echo "Starting and defining $VM_HOSTNAME"
-virsh define $VM_HOSTNAME.xml > /dev/null
-virsh start $VM_HOSTNAME > /dev/null
+/usr/bin/virsh define $VM_HOSTNAME.xml > /dev/null
+/usr/bin/virsh start $VM_HOSTNAME > /dev/null
