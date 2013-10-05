@@ -1,14 +1,27 @@
 #!/usr/bin/env bash
 
 VM_HOSTNAME=$1
-VM_TEMPLATE=ubuntu1204.qcow
+VM_TEMPLATE=$2
 VM_IMAGE=$VM_HOSTNAME.qcow
 
 # We require hostname
 if [ -x $VM_HOSTNAME ]; then
   echo "This script requires argument hostname"
-  echo "Usage: ./$0 [HOSTNAME]"
+  echo "Usage: ./$0 [HOSTNAME] [TEMPLATE]"
   exit 1
+fi
+
+# We also require a template
+if [ -x $VM_TEMPLATE ]; then
+  echo "This script requires argument template"
+  echo "Usage: ./$0 [HOSTNAME] [TEMPLATE]"
+  exit 1
+fi
+
+# Check if template exists
+if [ ! -f $VM_TEMPLATE ]; then
+  echo "Can't find template, check path and permissions"
+  exit 2
 fi
 
 # This is probably something we want to know first
