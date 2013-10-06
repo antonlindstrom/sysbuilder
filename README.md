@@ -10,6 +10,10 @@ of setting up a new machine from a template.
 
     sudo ./create_vm mymachine.example.com /path/to/template.qcow
 
+Optional:
+
+    sudo ./create_vm mymachine.example.com /path/to/template.qcow /path/to/vm/storage
+
 ## Details
 
 Due to the lack of KVM support in Packer, we're building the image in
