@@ -25,12 +25,22 @@ else
   echo "No VM_PATH, using: $VM_PATH"
 fi
 
+if [ -f $VM_PATH/.${VM_HOSTNAME}.lock ]; then
+  echo "Detected lockfile for $VM_HOSTNAME"
+  echo "VM already created or in creation"
+  echo "Lockfile: $VM_PATH/.${VM_HOSTNAME}.lock"
+  exit 9
+fi
+
+touch $VM_PATH/.${VM_HOSTNAME}.lock
+
 echo "Starting build of: $VM_HOSTNAME"
 
 bash $DIR/scripts/sysprep.sh $VM_HOSTNAME $VM_TEMPLATE $VM_PATH
 
 if [ $? != 0 ]; then
   echo "Could not create image!"
+  rm $VM_PATH/.${VM_HOSTNAME}.lock
   exit 2
 fi
 
@@ -38,6 +48,7 @@ bash $DIR/scripts/build_template.sh $VM_HOSTNAME $VM_PATH
 
 if [ $? != 0 ]; then
   echo "Could not create template!"
+  rm $VM_PATH/.${VM_HOSTNAME}.lock
   exit 2
 fi
 
