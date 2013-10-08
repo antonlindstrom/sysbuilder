@@ -14,6 +14,10 @@ Optional:
 
     sudo ./create_vm mymachine.example.com /path/to/template.qcow /path/to/vm/storage
 
+To remove a VM, use the following command:
+
+    sudo ./destroy_vm mymachine.example.com
+
 ## Details
 
 Due to the lack of KVM support in Packer, we're building the image in
