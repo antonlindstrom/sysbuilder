@@ -17,6 +17,13 @@ if [ -x $VM_TEMPLATE ]; then
   exit 1
 fi
 
+SYSPREP=$(which virt-sysprep)
+
+if [ $? != 0 ]; then
+  echo "FAIL: Command virt-sysprep does not exist!"
+  exit 1
+fi
+
 if [ -n $3 ]; then
   VM_PATH=$3
   echo "VM_PATH set, using: $VM_PATH"
