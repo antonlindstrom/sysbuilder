@@ -44,7 +44,7 @@ These Ubuntu packages are required:
 
 This should work:
 
-    apt-get install guestmount libguest-tools uuid
+    apt-get install guestmount libguestfs-tools uuid
 
 ### Whishlist
 
