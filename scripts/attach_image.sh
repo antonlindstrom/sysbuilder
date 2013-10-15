@@ -24,10 +24,10 @@ fi
 
 if [ -n $4 ]; then
   STORE_PATH=$4
-  echo "STORE_PATH set, using: $VM_PATH"
+  echo "STORE_PATH set, using: $STORE_PATH"
 else
   STORE_PATH=/var/lib/libvirt/images
-  echo "No STORE_PATH, using: $VM_PATH"
+  echo "No STORE_PATH, using: $STORE_PATH"
 fi
 
 IMAGE=$STORE_PATH/$HOSTNAME-$DISK.qcow
