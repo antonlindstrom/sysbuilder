@@ -59,4 +59,4 @@ echo "<disk type='file' device='disk'>
   <target dev='$DISK' bus='virtio'/>
 </disk>" > $DEFIN
 
-virsh attach-device $VM_HOSTNAME $DEFIN
+virsh attach-device $VM_HOSTNAME $DEFIN --persistent
