@@ -40,7 +40,12 @@ if [ $? != 0 ]; then
   exit 2
 fi
 
-$QEMU_IMG create -f qcow $IMAGE $SIZE
+$QEMU_IMG create -f qcow $IMAGE $SIZE > /dev/null
+
+if [ $? != 0 ]; then
+  echo "Failed to build image!"
+  exit 2
+fi
 
 echo "<disk type='file' device='disk'>
   <driver name='qemu' type='qcow' cache='writeback'/>
