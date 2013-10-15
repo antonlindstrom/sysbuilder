@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# For hot plugging.
+#
+# modprobe acpiphp
+# modprobe pci_hotplug
+#
+
 VM_HOSTNAME=$1
 DISK=$2
 SIZE=$3
